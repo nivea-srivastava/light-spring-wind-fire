@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 980" role="img" aria-labelledby="t d">
+  <title id="t">Production vacation-rental marketplace architecture</title>
+  <desc id="d">High-level scaling strategy for frontend, backend, storage, search, and deployment of a production-scale Airbnb-class marketplace.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FAFAF9"/>
+      <stop offset="1" stop-color="#F3F1EE"/>
+    </linearGradient>
+    <filter id="s" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#222" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1400" height="980" fill="url(#bg)"/>
+  <text x="48" y="56" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#222">Casa Aurora — production marketplace architecture</text>
+  <text x="48" y="84" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif" font-size="14" fill="#6A6A6A">Vacation-rental platform at Airbnb scale · edge delivery · independently scalable services</text>
+
+  <!-- Clients -->
+  <g filter="url(#s)">
+    <rect x="48" y="120" width="1304" height="90" rx="14" fill="#fff" stroke="#EBEBEB"/>
+  </g>
+  <text x="72" y="148" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">CLIENTS</text>
+  <text x="72" y="176" font-size="15" font-weight="600" fill="#222" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Web (SSR + hydration)  ·  iOS / Android  ·  Host tools  ·  Partner API  ·  Internal admin</text>
+  <text x="72" y="196" font-size="12" fill="#717171" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">CDN-cached listing HTML · signed-in app shell · BFF for mobile</text>
+
+  <!-- Edge -->
+  <g filter="url(#s)">
+    <rect x="48" y="232" width="1304" height="86" rx="14" fill="#222"/>
+  </g>
+  <text x="72" y="260" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">EDGE & DELIVERY</text>
+  <text x="72" y="286" font-size="15" font-weight="600" fill="#fff" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Anycast DNS  →  CDN (images, JS, CSS)  →  Edge workers (A/B, geo, auth cookie)  →  WAF / bot  →  Regional ingress</text>
+
+  <!-- Front -->
+  <g filter="url(#s)">
+    <rect x="48" y="340" width="420" height="220" rx="14" fill="#fff" stroke="#EBEBEB"/>
+  </g>
+  <text x="72" y="370" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">FRONTEND SCALE</text>
+  <text x="72" y="398" font-size="14" fill="#222" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">SSR listing pages at the edge</text>
+  <text x="72" y="420" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• ISR / stale-while-revalidate for public listings</text>
+  <text x="72" y="440" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Image CDN: WebP/AVIF, room-based derivatives</text>
+  <text x="72" y="460" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Photo tour & lightbox as client islands</text>
+  <text x="72" y="480" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Multi-region app pods behind Anycast</text>
+  <text x="72" y="500" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Feature flags + canary deploys</text>
+  <text x="72" y="520" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Deploy: Vercel / k8s + GitOps</text>
+  <text x="72" y="540" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Observability: RUM, CWV, Sentry</text>
+
+  <!-- API -->
+  <g filter="url(#s)">
+    <rect x="490" y="340" width="420" height="220" rx="14" fill="#fff" stroke="#EBEBEB"/>
+  </g>
+  <text x="514" y="370" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">BACKEND SERVICES</text>
+  <text x="514" y="398" font-size="14" fill="#222" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">API gateway + BFF</text>
+  <text x="514" y="420" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Listing · Pricing · Calendar · Booking</text>
+  <text x="514" y="440" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Identity (OIDC) · Payments · Messaging</text>
+  <text x="514" y="460" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Reviews · Trust & Safety · Notifications</text>
+  <text x="514" y="480" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Saga / outbox for reserve → pay → confirm</text>
+  <text x="514" y="500" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Idempotent booking keys, optimistic calendar</text>
+  <text x="514" y="520" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Horizontal pods, HPA on CPU + queue depth</text>
+  <text x="514" y="540" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• gRPC internally, REST/GraphQL at edge</text>
+
+  <!-- Data -->
+  <g filter="url(#s)">
+    <rect x="932" y="340" width="420" height="220" rx="14" fill="#fff" stroke="#EBEBEB"/>
+  </g>
+  <text x="956" y="370" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">DATA & SEARCH</text>
+  <text x="956" y="398" font-size="14" fill="#222" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Polyglot storage</text>
+  <text x="956" y="420" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Postgres (Citus / RDS Multi-AZ) listings, users</text>
+  <text x="956" y="440" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Redis cluster: sessions, hot pricing, locks</text>
+  <text x="956" y="460" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• OpenSearch: geo + amenity + availability</text>
+  <text x="956" y="480" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Object storage + img CDN for photo tour</text>
+  <text x="956" y="500" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Kafka: inventory, search index, analytics</text>
+  <text x="956" y="520" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• OLAP warehouse (BigQuery / Snowflake)</text>
+  <text x="956" y="540" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">• Read replicas per region, async search index</text>
+
+  <!-- Booking path -->
+  <g filter="url(#s)">
+    <rect x="48" y="584" width="850" height="170" rx="14" fill="#fff" stroke="#EBEBEB"/>
+  </g>
+  <text x="72" y="614" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">BOOKING PATH (consistency)</text>
+  <text x="72" y="644" font-size="13" fill="#222" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">1. Quote  →  2. Hold nights (Redis lock + calendar row)  →  3. Payment auth  →  4. Confirm  →  5. Notify host/guest  →  6. Index</text>
+  <text x="72" y="668" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Calendar writes go to the region that owns the listing. Cross-region readers see eventual availability via CDC.</text>
+  <text x="72" y="692" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Failed payment releases the hold (TTL). Exactly-once effects via outbox + idempotency keys on Reserve.</text>
+  <text x="72" y="716" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Trust & Safety scores the reservation asynchronously; high-risk holds for review instead of auto-confirm.</text>
+  <text x="72" y="740" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Search filters nights using a denormalized availability bitmap, rebuilt from the calendar stream.</text>
+
+  <!-- Deploy -->
+  <g filter="url(#s)">
+    <rect x="918" y="584" width="434" height="170" rx="14" fill="#fff" stroke="#EBEBEB"/>
+  </g>
+  <text x="942" y="614" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">DEPLOYMENT</text>
+  <text x="942" y="644" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">GitHub Actions → build, typecheck, visual</text>
+  <text x="942" y="664" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">diff, a11y. Preview deploys per PR.</text>
+  <text x="942" y="684" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Prod: blue/green on k8s + edge config.</text>
+  <text x="942" y="704" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Secrets via KMS. No runtime disk writes.</text>
+  <text x="942" y="724" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">This demo: static listing data, no auth DB.</text>
+  <text x="942" y="744" font-size="13" fill="#6A6A6A" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Target: Vercel (SSR) + object storage.</text>
+
+  <!-- This clone -->
+  <g filter="url(#s)">
+    <rect x="48" y="776" width="1304" height="160" rx="14" fill="#222"/>
+  </g>
+  <text x="72" y="808" font-size="12" font-weight="700" fill="#FF385C" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">THIS SUBMISSION (SCOPED)</text>
+  <text x="72" y="836" font-size="14" fill="#fff" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Frontend-only listing experience: Listing page · Photo tour · Lightbox. Data lives in the bundle (listing-data.ts).</text>
+  <text x="72" y="860" font-size="13" fill="#C9C9C9" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">TanStack Start + React 19 + Tailwind v4 · no accounts · no database · calendar and quote computed on the client.</text>
+  <text x="72" y="884" font-size="13" fill="#C9C9C9" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">Maps to production: replace listing-data with Listing API + Image CDN; Reserve becomes the booking saga; search pill becomes OpenSearch.</text>
+  <text x="72" y="908" font-size="13" fill="#C9C9C9" font-family="Plus Jakarta Sans, Helvetica, Arial, sans-serif">AI workflow: design tokens first, then overlays as a state machine, then Playwright visual QA against desktop 1280 and the three views.</text>
+</svg>

@@ -1,0 +1,349 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Nunito Sans", "Circular", ui-sans-serif,
+    system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --color-rausch: #ff385c;
+  --color-rausch-hover: #e31c5f;
+  --color-rausch-deep: #d70466;
+  --color-ink: #222222;
+  --color-mute: #6a6a6a;
+  --color-faint: #717171;
+  --color-line: #dddddd;
+  --color-hair: #ebebeb;
+  --color-wash: #f7f7f7;
+  --color-paper: #ffffff;
+  --color-overlay: rgb(34 34 34 / 0.45);
+  --color-scrim: rgb(0 0 0 / 0.8);
+
+  --text-hero: 1.625rem;
+  --text-hero--line-height: 1.15;
+  --text-section: 1.375rem;
+  --text-section--line-height: 1.2;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.35;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.3;
+
+  --radius-pill: 40px;
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-photo: 12px;
+
+  --shadow-search: 0 1px 2px rgb(0 0 0 / 0.08), 0 4px 12px rgb(0 0 0 / 0.05);
+  --shadow-search-hover: 0 2px 4px rgb(0 0 0 / 0.18);
+  --shadow-card: 0 6px 16px rgb(0 0 0 / 0.12);
+  --shadow-float: 0 8px 28px rgb(0 0 0 / 0.12);
+  --shadow-menu: 0 2px 16px rgb(0 0 0 / 0.12);
+
+  --height-header: 80px;
+  --height-photo: 412px;
+  --width-listing: 1120px;
+}
+
+@layer base {
+  html,
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.43;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  * {
+    border-color: var(--color-line);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .listing-wrap {
+    width: min(100%, var(--width-listing));
+    margin-inline: auto;
+    padding-inline: 24px;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  @media (min-width: 768px) {
+    .listing-wrap {
+      padding-inline: 40px;
+    }
+  }
+
+  @media (min-width: 1128px) {
+    .listing-wrap {
+      padding-inline: 80px;
+      width: min(100%, calc(var(--width-listing) + 160px));
+    }
+  }
+
+  .section-rule {
+    border: 0;
+    border-top: 1px solid var(--color-hair);
+    margin: 48px 0;
+  }
+
+  .air-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    transition: transform 80ms ease, background 150ms ease;
+  }
+
+  .air-btn:hover {
+    background: var(--color-wash);
+  }
+
+  .air-btn:active {
+    transform: scale(0.96);
+  }
+
+  .air-btn-ghost {
+    border: 0;
+    background: transparent;
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .air-btn-ghost:hover {
+    background: var(--color-wash);
+  }
+
+  .reserve-btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    width: 100%;
+    height: 48px;
+    border: 0;
+    border-radius: var(--radius-btn);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    background: linear-gradient(90deg, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+    transition: transform 80ms ease, filter 150ms ease;
+  }
+
+  .reserve-btn:hover {
+    filter: brightness(0.96);
+  }
+
+  .reserve-btn:active {
+    transform: scale(0.98);
+  }
+
+  .photo-tile {
+    position: relative;
+    overflow: hidden;
+    background: #ddd;
+  }
+
+  .photo-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    transition: transform 400ms ease;
+  }
+
+  .photo-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0);
+    transition: background 180ms ease;
+    pointer-events: none;
+  }
+
+  .photo-tile:hover::after,
+  .photo-tile:focus-visible::after {
+    background: rgb(0 0 0 / 0.18);
+  }
+
+  .link-under {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .link-under:hover {
+    color: var(--color-ink);
+  }
+}
+
+/* Day-picker (Airbnb calendar) */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 2.75rem);
+  gap: 0;
+}
+
+.cal-dow {
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  color: var(--color-faint);
+  font-weight: 600;
+}
+
+.cal-day {
+  height: 2.75rem;
+  width: 2.75rem;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  position: relative;
+  z-index: 1;
+}
+
+.cal-day[data-in-range="true"] {
+  border-radius: 0;
+}
+
+.cal-day[data-range-start="true"] {
+  background: var(--color-ink);
+  color: white;
+  border-radius: 50%;
+}
+
+.cal-day[data-range-end="true"] {
+  background: var(--color-ink);
+  color: white;
+  border-radius: 50%;
+}
+
+.cal-day:hover:not(:disabled):not([data-range-start="true"]):not(
+    [data-range-end="true"]
+  ) {
+  border: 1px solid var(--color-ink);
+  background: transparent;
+}
+
+.cal-day:disabled {
+  color: var(--color-line);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+.cal-cell {
+  position: relative;
+}
+
+.cal-cell[data-in-range="true"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-wash);
+}
+
+.cal-cell[data-range-start="true"]::before {
+  left: 50%;
+  background: var(--color-wash);
+}
+
+.cal-cell[data-range-end="true"]::before {
+  right: 50%;
+  background: var(--color-wash);
+}
+
+.cal-cell[data-range-start="true"][data-range-end="true"]::before {
+  display: none;
+}
+
+/* Overlays */
+.overlay-enter {
+  animation: overlay-in 280ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.overlay-fade {
+  animation: fade-in 200ms ease;
+}
+
+.lb-fade {
+  animation: fade-in 180ms ease;
+}
+
+@keyframes overlay-in {
+  from {
+    transform: translateY(32px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay-enter,
+  .overlay-fade,
+  .lb-fade,
+  .photo-tile img,
+  .reserve-btn,
+  .air-btn {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Scrollbars in photo tour nav */
+.tour-nav::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

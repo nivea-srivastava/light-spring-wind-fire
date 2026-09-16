@@ -1,0 +1,6 @@
+---
+description: Conventions for the Casa Aurora Airbnb listing clone
+globs: src/**/*
+---
+
+This app is a desktop listing-page clone (plus photo tour and lightbox). Auth and database are off. Listing copy and photos come from `src/lib/listing-data.ts`. Overlays are a state machine in `ListingApp`, not routes. Follow tokens in `src/styles.css`. Do not scrape or paste a third-party clone codebase.

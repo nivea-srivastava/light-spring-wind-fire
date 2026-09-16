@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Casa Aurora · Greve in Chianti",
+      "hasCanvas": false,
+      "bodyTextLen": 5621,
+      "bodyTextHash": "f3afe1ffd498d68a418a05b8b94633c93433d7b4a84954547e1de465d9620d03",
+      "bodyTextPrefix": "Skip to photos airbnb Anywhere Any week Add guests Airbnb your h",
+      "horizontalOverflow": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Casa Aurora · Greve in Chianti",
+      "hasCanvas": false,
+      "bodyTextLen": 5354,
+      "bodyTextHash": "538d312a1e95c9896319e1ad443ca5ba250e631b0d210b431771396c0e0f7223",
+      "bodyTextPrefix": "Skip to photos airbnb Architectural villa in Chianti Guest favor",
+      "horizontalOverflow": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
